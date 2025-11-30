@@ -56,6 +56,7 @@ namespace GoMart
                     // Login Code is Here for the Admin and User
                     if (cmbrole.SelectedIndex > 0 && txtusername.Text != String.Empty && txtpassword.Text != String.Empty)
                     {
+                        // Login code
 
 
                     }
@@ -63,6 +64,9 @@ namespace GoMart
                     else
                     {
                         MessageBox.Show("Please Enter User name or the Password", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        cmbrole.SelectedIndex = 0;
+                        txtusername.Clear();
+                        txtpassword.Clear();
 
                     }
                 }
@@ -71,6 +75,9 @@ namespace GoMart
  else
                 {
                     MessageBox.Show("Please Select any Role", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    mbrole.SelectedIndex = 0;
+                    txtusername.Clear();
+                    txtpassword.Clear();
                 }
 
 
