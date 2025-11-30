@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,8 @@ namespace GoMart
 {
     public partial class Form1 : Form
     {
+        DBConnect dbCon = new DBConnect();
+
         public Form1()
         {
             InitializeComponent();
@@ -57,7 +60,33 @@ namespace GoMart
                     if (cmbrole.SelectedIndex > 0 && txtusername.Text != String.Empty && txtpassword.Text != String.Empty)
                     {
                         // Login code
+                        if (cmbrole.Text == "Admin")
+                        {
+                            SqlCommand cmd = new SqlCommand("select top 1 AdminID, Password, FullName from tblAdmin where AdminID=@AdminID and Password=@Password", dbCon.GetCon());
+                            cmd.Parameters.AddWithValue("@AdminID", txtusername.Text);
+                            cmd.Parameters.AddWithValue("@Password", txtpassword.Text);
+                            dbCon.OpenCon();
+                            SqlDataAdapter da = new SqlDataAdapter(cmd);
+                            DataTable dt = new DataTable();
+                            da.Fill(dt);
 
+                            // Check if dt has received any data
+                            if (dt.Rows.Count > 0)
+                            {
+                                MessageBox.Show("Login Success, Welcome to Home Page", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                this.Hide();
+                                frmMain fm = new frmMain();
+                                fm.Show();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Invalid login, Please check UserName and Password", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                        }
+                        else if (cmbrole.Text == "Seller")
+                        {
+
+                        }
 
                     }
 
@@ -75,7 +104,7 @@ namespace GoMart
  else
                 {
                     MessageBox.Show("Please Select any Role", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    mbrole.SelectedIndex = 0;
+                    cmbrole.SelectedIndex = 0;
                     txtusername.Clear();
                     txtpassword.Clear();
                 }
