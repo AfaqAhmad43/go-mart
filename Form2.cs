@@ -33,6 +33,7 @@ namespace GoMart
         {
             btnUpdate.Visible = false;
             btnDelete.Visible = false;
+            bindCategory();
 
         }
 
@@ -70,6 +71,8 @@ namespace GoMart
                         if (i > 0)
                         {
                             MessageBox.Show("Category inserted successfully...", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            txtClear();
+                            bindCategory();
                         } 
                     }
                     dbCon.CloseCon();
@@ -82,6 +85,27 @@ namespace GoMart
             txtcatname.Clear();
             rtbcatdesc.Clear();
 
+        }
+
+
+        private void bindCategory()
+        {
+            SqlCommand cmd = new SqlCommand("select CategoryID , CategoryName, CategoryDesc as CategoryDescription from tblCategory", dbCon.GetCon());
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            dataGridView1.DataSource = dt;
+            dbCon.OpenCon();
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            btnUpdate.Visible = true;
+            btnDelete.Visible = true;
+            btnAdd.Visible = false;
+            string varCatID = dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
+            txtcatname.Text = dataGridView1.SelectedRows[0].Cells[1].Value.ToString();
+            rtbcatdesc.Text = dataGridView1.SelectedRows[0].Cells[2].Value.ToString();
         }
     }
 }
