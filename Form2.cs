@@ -36,20 +36,32 @@ namespace GoMart
                 }
                 if (lblCatID.Text != String.Empty)
                 {
-                    SqlCommand cmd = new SqlCommand("spCatDelete", dbCon.GetCon());
-                    cmd.Parameters.AddWithValue("@CategoryID", Convert.ToInt32(lblCatID.Text));
-                    cmd.CommandType = CommandType.StoredProcedure; int i = cmd.ExecuteNonQuery();
-                    if (i > 0)
+                    if (DialogResult.Yes == MessageBox.Show("Do you want to delete?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                     {
-                        MessageBox.Show("Category deleted successfully...", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        txtClear();
-                        bindCategory();
+                        SqlCommand cmd = new SqlCommand("spCatDelete", dbCon.GetCon());
+                        cmd.Parameters.AddWithValue("@CategoryID", Convert.ToInt32(lblCatID.Text));
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        dbCon.OpenCon();
+                        int i = cmd.ExecuteNonQuery();
+
+                        if (i > 0)
+                        {
+                            MessageBox.Show("Category deleted successfully...", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            txtClear();
+                            bindCategory();
+                            btnUpdate.Visible = false;
+                            btnDelete.Visible = false;
+                            btnAdd.Visible = true;
+                            lblCatID.Visible = false;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Category delete failed...", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            txtClear();
+                        }
+                        dbCon.CloseCon();
                     }
-                    else
-                    {
-                        MessageBox.Show("Category delete failed...", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        txtClear();
-                    }
+                    
                 }
             }
             catch(Exception ex)
@@ -90,14 +102,15 @@ namespace GoMart
                     var result = cmd.ExecuteScalar();
                     if (result != null)
                     { 
-                        MessageBox.Show(String.Format("CategoryName {0} already exists"), "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show("CategoryName already exists.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     } 
                     else
                     { 
                         cmd = new SqlCommand("spCatInsert", dbCon.GetCon());
                         cmd.Parameters.AddWithValue("@CategoryName", txtcatname.Text);
                         cmd.Parameters.AddWithValue("@CategoryDesc", rtbcatdesc.Text);
-                        cmd.CommandType = CommandType.StoredProcedure; int i = cmd.ExecuteNonQuery();
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        int i = cmd.ExecuteNonQuery();
                         if (i > 0)
                         {
                             MessageBox.Show("Category inserted successfully...", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -150,58 +163,73 @@ namespace GoMart
             rtbcatdesc.Text = dataGridView1.SelectedRows[0].Cells[2].Value.ToString();
         }
 
+        // Update button events
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            if (lblCatID.Text == String.Empty)
+            try
             {
-                MessageBox.Show("Please Select Category ID", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txtcatname.Focus();
-                return;
-            }
-            if (txtcatname.Text == String.Empty)
-            {
-                MessageBox.Show("Please Enter Category Name", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txtcatname.Focus();
-                return;
-            }
-            else if (rtbcatdesc.Text == String.Empty)
-            {
-                MessageBox.Show("Please Enter valid Password", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                rtbcatdesc.Focus();
-                return;
-            }
-            // For Storing the Category Data
-            else
-            {
-                SqlCommand cmd = new SqlCommand("select CategoryName from tblCategory where CategoryName=@CategoryName", dbCon.GetCon());
-                cmd.Parameters.AddWithValue("@CategoryName", txtcatname.Text);
-                dbCon.OpenCon();
-                var result = cmd.ExecuteScalar();
-                if (result != null)
+                if (lblCatID.Text == String.Empty)
                 {
-                    MessageBox.Show(String.Format("CategoryName {0} already exists"), "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Please Select Category ID", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txtcatname.Focus();
+                    return;
                 }
+                if (txtcatname.Text == String.Empty)
+                {
+                    MessageBox.Show("Please Enter Category Name", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txtcatname.Focus();
+                    return;
+                }
+                else if (rtbcatdesc.Text == String.Empty)
+                {
+                    MessageBox.Show("Please Enter valid Password", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    rtbcatdesc.Focus();
+                    return;
+                }
+                // For Storing the Category Data
                 else
                 {
-                    cmd = new SqlCommand("spCatUpdate", dbCon.GetCon());
-                    cmd.Parameters.AddWithValue("@CategoryID", Convert.ToInt32(lblCatID.Text));
+                    SqlCommand cmd = new SqlCommand("select CategoryName from tblCategory where CategoryName=@CategoryName", dbCon.GetCon());
                     cmd.Parameters.AddWithValue("@CategoryName", txtcatname.Text);
-                    cmd.Parameters.AddWithValue("@CategoryDesc", rtbcatdesc.Text);
-                    cmd.CommandType = CommandType.StoredProcedure; int i = cmd.ExecuteNonQuery();
-                    if (i > 0)
+                    dbCon.OpenCon();
+                    var result = cmd.ExecuteScalar();
+                    if (result != null)
                     {
-                        MessageBox.Show("Category updated successfully...", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        txtClear();
-                        bindCategory();
+                        MessageBox.Show("Category name already exists.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                     else
                     {
-                        MessageBox.Show("Category update failed...", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        txtClear();
+                        cmd = new SqlCommand("spCatUpdate", dbCon.GetCon());
+                        cmd.Parameters.AddWithValue("@CategoryID", Convert.ToInt32(lblCatID.Text));
+                        cmd.Parameters.AddWithValue("@CategoryName", txtcatname.Text);
+                        cmd.Parameters.AddWithValue("@CategoryDesc", rtbcatdesc.Text);
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        dbCon.CloseCon();
+                        int i = cmd.ExecuteNonQuery();
+
+                        if (i > 0)
+                        {
+                            MessageBox.Show("Category updated successfully...", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            txtClear();
+                            bindCategory();
+                            btnUpdate.Visible = false;
+                            btnDelete.Visible = false;
+                            btnAdd.Visible = true;
+                            lblCatID.Visible = false;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Category update failed...", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            txtClear();
+                        }
                     }
+                    dbCon.CloseCon();
                 }
-                dbCon.CloseCon();
             }
+            catch (Exception ex) {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error );     
+            }
+            
         }
     }
 }

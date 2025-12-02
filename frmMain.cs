@@ -59,5 +59,19 @@ namespace GoMart
             AboutBox1 abt = new AboutBox1();
             abt.Show();
         }
+
+        private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DialogResult dialog = MessageBox.Show("Do you really want to close this application?", "Close", MessageBoxButtons.YesNo, MessageBoxIcon.Stop);
+
+            if (dialog == DialogResult.No)
+            {
+                e.Cancel = true;
+            }
+            else
+            {
+                Application.Exit();
+            }
+        }
     }
 }
