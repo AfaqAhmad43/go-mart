@@ -38,7 +38,9 @@ namespace GoMart
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            cmbrole.SelectedIndex = 0;
+            cmbrole.SelectedIndex = 1;
+            txtusername.Text = "Coder";
+            txtpassword.Text = "12345";
         }
 
         private void btnLogin_Click(object sender, EventArgs e)

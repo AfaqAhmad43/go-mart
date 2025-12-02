@@ -39,6 +39,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.lblCatID = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -67,6 +68,7 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.SandyBrown;
+            this.groupBox1.Controls.Add(this.lblCatID);
             this.groupBox1.Controls.Add(this.btnUpdate);
             this.groupBox1.Controls.Add(this.btnDelete);
             this.groupBox1.Controls.Add(this.btnAdd);
@@ -94,6 +96,7 @@
             this.btnUpdate.TabIndex = 8;
             this.btnUpdate.Text = "Update";
             this.btnUpdate.UseVisualStyleBackColor = false;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // btnDelete
             // 
@@ -170,6 +173,17 @@
             this.dataGridView1.Size = new System.Drawing.Size(383, 362);
             this.dataGridView1.TabIndex = 2;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.dataGridView1.Click += new System.EventHandler(this.dataGridView1_Click);
+            // 
+            // lblCatID
+            // 
+            this.lblCatID.AutoSize = true;
+            this.lblCatID.ForeColor = System.Drawing.Color.Indigo;
+            this.lblCatID.Location = new System.Drawing.Point(114, 45);
+            this.lblCatID.Name = "lblCatID";
+            this.lblCatID.Size = new System.Drawing.Size(35, 13);
+            this.lblCatID.TabIndex = 1;
+            this.lblCatID.Text = "label4";
             // 
             // Form2
             // 
@@ -205,5 +219,6 @@
         private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Label lblCatID;
     }
 }
