@@ -47,5 +47,17 @@ namespace GoMart
 
             }
         }
+
+        private void masterToolStripItem_Click(object sender, EventArgs e)
+        {
+            Form2 fcat = new Form2();
+            fcat.Show();
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AboutBox1 abt = new AboutBox1();
+            abt.Show();
+        }
     }
 }
