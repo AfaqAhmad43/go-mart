@@ -73,5 +73,18 @@ namespace GoMart
                 Application.Exit();
             }
         }
+
+        private void addUserToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void sellerToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            frmAddNewSeller fSeller = new frmAddNewSeller();
+            fSeller.ShowDialog();
+
+
+        }
     }
 }
