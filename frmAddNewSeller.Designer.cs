@@ -223,6 +223,7 @@
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(776, 181);
             this.dataGridView1.TabIndex = 3;
+            this.dataGridView1.Click += new System.EventHandler(this.dataGridView1_Click);
             // 
             // frmAddNewSeller
             // 

@@ -39,7 +39,7 @@ namespace GoMart
                     if (DialogResult.Yes == MessageBox.Show("Do you want to delete?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                     {
                         SqlCommand cmd = new SqlCommand("spCatDelete", dbCon.GetCon());
-                        cmd.Parameters.AddWithValue("@CategoryID", Convert.ToInt32(lblCatID.Text));
+                        cmd.Parameters.AddWithValue("@CatID", Convert.ToInt32(lblCatID.Text));
                         cmd.CommandType = CommandType.StoredProcedure;
                         dbCon.OpenCon();
                         int i = cmd.ExecuteNonQuery();
@@ -200,7 +200,7 @@ namespace GoMart
                     else
                     {
                         cmd = new SqlCommand("spCatUpdate", dbCon.GetCon());
-                        cmd.Parameters.AddWithValue("@CategoryID", Convert.ToInt32(lblCatID.Text));
+                        cmd.Parameters.AddWithValue("@CatID", Convert.ToInt32(lblCatID.Text));
                         cmd.Parameters.AddWithValue("@CategoryName", txtcatname.Text);
                         cmd.Parameters.AddWithValue("@CategoryDesc", rtbcatdesc.Text);
                         cmd.CommandType = CommandType.StoredProcedure;
