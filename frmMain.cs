@@ -74,6 +74,7 @@ namespace GoMart
             }
         }
 
+<<<<<<< HEAD
         private void addUserToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
@@ -83,6 +84,20 @@ namespace GoMart
         {
             frmAddNewSeller fSeller = new frmAddNewSeller();
             fSeller.ShowDialog();
+
+
+=======
+        private void sellerToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            frmAddNewSeller fseller = new frmAddNewSeller();
+            fseller.ShowDialog();
+>>>>>>> e9d2e6b65d3cde87382b6298afbe9debacf4856c
+        }
+
+        private void adminToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            addAdmin aaf = new addAdmin();
+            aaf.Show();
 
 
         }

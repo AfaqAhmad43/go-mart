@@ -36,14 +36,14 @@
             this.sellerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addUserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.adminToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sellerToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label2 = new System.Windows.Forms.Label();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.adminToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sellerToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -123,6 +123,20 @@
             this.addUserToolStripMenuItem.Text = "Add User";
             this.addUserToolStripMenuItem.Click += new System.EventHandler(this.addUserToolStripMenuItem_Click);
             // 
+            // adminToolStripMenuItem
+            // 
+            this.adminToolStripMenuItem.Name = "adminToolStripMenuItem";
+            this.adminToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.adminToolStripMenuItem.Text = "Admin";
+            this.adminToolStripMenuItem.Click += new System.EventHandler(this.adminToolStripMenuItem_Click);
+            // 
+            // sellerToolStripMenuItem1
+            // 
+            this.sellerToolStripMenuItem1.Name = "sellerToolStripMenuItem1";
+            this.sellerToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.sellerToolStripMenuItem1.Text = "Seller";
+            this.sellerToolStripMenuItem1.Click += new System.EventHandler(this.sellerToolStripMenuItem1_Click);
+            // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
@@ -173,19 +187,6 @@
             this.toolStripStatusLabel2.Size = new System.Drawing.Size(140, 17);
             this.toolStripStatusLabel2.Text = "toolStripStatusLabel2";
             // 
-            // adminToolStripMenuItem
-            // 
-            this.adminToolStripMenuItem.Name = "adminToolStripMenuItem";
-            this.adminToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.adminToolStripMenuItem.Text = "Admin";
-            // 
-            // sellerToolStripMenuItem1
-            // 
-            this.sellerToolStripMenuItem1.Name = "sellerToolStripMenuItem1";
-            this.sellerToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-            this.sellerToolStripMenuItem1.Text = "Seller";
-            this.sellerToolStripMenuItem1.Click += new System.EventHandler(this.sellerToolStripMenuItem1_Click);
-            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -228,7 +229,11 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         private System.Windows.Forms.ToolStripMenuItem sellerToolStripMenuItem;
+<<<<<<< HEAD
         private System.Windows.Forms.ToolStripMenuItem adminToolStripMenuItem;
+=======
+        private System.Windows.Forms.ToolStripMenuItem addToolStripMenuItem;
+>>>>>>> e9d2e6b65d3cde87382b6298afbe9debacf4856c
         private System.Windows.Forms.ToolStripMenuItem sellerToolStripMenuItem1;
     }
 }
